@@ -10,6 +10,7 @@ def sum_board():
     row_sum=[]
     col_sum=[]
 
+    # Counts the sum of the row
     for row in range(len(board_reader.board)):
         temp_sum=0
         for col in range(len(board_reader.board)):
@@ -17,7 +18,7 @@ def sum_board():
                 temp_sum += board_reader.board[row][col]
         row_sum.append(temp_sum)
         
-
+    # Counts the sum of the column
     for col in range(len(board_reader.board)):
         temp_sum=0
         for row in range(len(board_reader.board)):
