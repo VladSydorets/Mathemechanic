@@ -17,15 +17,16 @@ def draw_grid(screen, board_len, WIDTH, HEIGHT, empty_cell_height, empty_cell_wi
                             WIDTH,
                             HEIGHT])
             
-            if column == 0:
-                row_goal_cell_value=game_font.render(str(board_reader.ROW_GOAL[row]), True, consts.FONT_COLOR)
-                screen.blit(row_goal_cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN + consts.FONT_SIZE/2),
-                                ((consts.MARGIN + HEIGHT) * row + consts.MARGIN*3)+empty_cell_height + consts.FONT_SIZE/2))
-            
             if column == 1:
-                row_cell_value=game_font.render(str(row_sum[row]), True, consts.FONT_COLOR)
-                screen.blit(row_cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN + consts.FONT_SIZE/2),
-                                ((consts.MARGIN + HEIGHT) * row + consts.MARGIN*3)+empty_cell_height + consts.FONT_SIZE/2))
+                row_goal_cell_value=game_font.render(str(board_reader.ROW_GOAL[row]), True, consts.RED_FONT_COLOR)
+                screen.blit(row_goal_cell_value, ((((WIDTH/2)-row_goal_cell_value.get_rect().width/2) + consts.MARGIN) + (consts.MARGIN+HEIGHT) * column,
+                                    (empty_cell_height + consts.MARGIN*3) + ((HEIGHT/2) - (row_goal_cell_value.get_rect().height/2)) + (consts.MARGIN+HEIGHT) * row))
+
+            if column == 0:
+                row_cell_value=game_font.render(str(row_sum[row]), True, consts.WHITE_FONT_COLOR)
+                screen.blit(row_cell_value, (((WIDTH/2)-row_cell_value.get_rect().width/2) + consts.MARGIN,
+                                    (empty_cell_height + consts.MARGIN*3) + ((HEIGHT/2) - (row_cell_value.get_rect().height/2)) + (consts.MARGIN+HEIGHT) * row
+                                ))
 
 
     # Draw the cells for sum of columns
@@ -38,22 +39,21 @@ def draw_grid(screen, board_len, WIDTH, HEIGHT, empty_cell_height, empty_cell_wi
                             WIDTH,
                             HEIGHT])
 
-            if row == 0:
-                col_goal_cell_value=game_font.render(str(board_reader.COLUMN_GOAL[column]), True, consts.FONT_COLOR)
-                screen.blit(col_goal_cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN *3 + empty_cell_width + consts.FONT_SIZE/2),
-                                ((consts.MARGIN + HEIGHT) * row + consts.MARGIN) + consts.FONT_SIZE/2))
-
             if row == 1:
-                col_cell_value=game_font.render(str(col_sum[column]), True, consts.FONT_COLOR)
-                screen.blit(col_cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN *3 + empty_cell_width + consts.FONT_SIZE/2),
-                                ((consts.MARGIN + HEIGHT) * row + consts.MARGIN) + consts.FONT_SIZE/2))
+                col_goal_cell_value=game_font.render(str(board_reader.COLUMN_GOAL[column]), True, consts.RED_FONT_COLOR)
+                screen.blit(col_goal_cell_value, ((empty_cell_height + consts.MARGIN*3) + ((WIDTH/2) - (col_goal_cell_value.get_rect().width/2)) + (consts.MARGIN+WIDTH) * column,
+                                                            ((HEIGHT/2)-col_goal_cell_value.get_rect().height/2) + (consts.MARGIN+HEIGHT) * row))
+            if row == 0:
+                col_cell_value=game_font.render(str(col_sum[column]), True, consts.WHITE_FONT_COLOR)
+                screen.blit(col_cell_value, ((empty_cell_height + consts.MARGIN*3) + ((WIDTH/2) - (col_cell_value.get_rect().width/2)) + (consts.MARGIN+WIDTH) * column,
+                                            ((HEIGHT/2)-col_cell_value.get_rect().height/2) + consts.MARGIN))
 
     # Draw the grid
     for row in range(board_len):
         for column in range(board_len):
             if board_reader.board_status[row][column] == True:
                 cell_color=consts.CELL_COLOR
-                font_color=consts.FONT_COLOR
+                font_color=consts.WHITE_FONT_COLOR
             else:
                 cell_color=consts.CELL_COLOR_OFF
                 font_color=consts.FONT_COLOR_OFF
@@ -71,6 +71,8 @@ def draw_grid(screen, board_len, WIDTH, HEIGHT, empty_cell_height, empty_cell_wi
                             WIDTH,
                             HEIGHT], width=1, border_radius=5)
             # Render values 
-            cell_value=game_font.render(str(board_reader.board[row][column]), True, font_color)
-            screen.blit(cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN*4)+empty_cell_width+consts.FONT_SIZE/2,
-                            ((consts.MARGIN + HEIGHT) * row + consts.MARGIN*3)+empty_cell_height+consts.FONT_SIZE/2))
+            cell_value=(pygame.font.SysFont(consts.FONT_TYPE, consts.FONT_SIZE)).render(str(board_reader.board[row][column]), True, font_color)
+            # screen.blit(cell_value, (((consts.MARGIN + WIDTH) * column + consts.MARGIN*4)+empty_cell_width+consts.FONT_SIZE/2,
+            #                 ((consts.MARGIN + HEIGHT) * row + consts.MARGIN*3)+empty_cell_height+consts.FONT_SIZE/2))
+            screen.blit(cell_value, ((empty_cell_width + consts.MARGIN*3) + ((WIDTH/2) - (col_cell_value.get_rect().width/2)) + (consts.MARGIN+WIDTH) * column,
+                            (empty_cell_height + consts.MARGIN*3) + ((HEIGHT/2) - (col_cell_value.get_rect().height/2)) + (consts.MARGIN+HEIGHT) * row))

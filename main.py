@@ -33,11 +33,14 @@ if __name__ == "__main__":
 
     board_len=len(board_reader.board[0])
 
-    game_font=pygame.font.SysFont(consts.FONT_TYPE, consts.FONT_SIZE)
+    game_font=pygame.font.SysFont(consts.FONT_TYPE, consts.FONT_SIZE_GOAL)
 
     # This sets the WIDTH and HEIGHT of each grid location
-    WIDTH = consts.SCREEN_WIDTH/(board_len)-(consts.MARGIN*board_len+3)
-    HEIGHT = consts.SCREEN_HEIGHT/(board_len)-(consts.MARGIN*board_len+3)
+    # WIDTH = consts.SCREEN_WIDTH/(board_len)-(consts.MARGIN*board_len+3)
+    # HEIGHT = consts.SCREEN_HEIGHT/(board_len)-(consts.MARGIN*board_len+3)
+
+    WIDTH = (consts.SCREEN_WIDTH-consts.MARGIN*board_reader.board_size)/(board_len+2)
+    HEIGHT = (consts.SCREEN_HEIGHT-consts.MARGIN*board_reader.board_size)/(board_len+2)
 
     # Offcast needed to draw the grid
     empty_cell_width=WIDTH*2
@@ -59,7 +62,7 @@ if __name__ == "__main__":
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (WIDTH + consts.MARGIN)
                 row = pos[1] // (HEIGHT + consts.MARGIN)
-                if (row > 1 and column > 1) and (row < 8 and column < 8):
+                if (row > 1 and column > 1) and (row < board_reader.board_size and column < board_reader.board_size):
                     row_coords = int(row-2)
                     col_coords = int(column-2)
 
