@@ -1,22 +1,21 @@
-with open("maps/map-1.txt") as textFile:
-    board = [line.strip().split(',') for line in textFile]
+# def read_bord(level):
+#     map_path = "maps/map-" + level + ".txt" 
 
-board=[list(map(int,i)) for i in board]
+#     with open(map_path) as textFile:
+#         board = [line.strip().split(',') for line in textFile]
 
-board_size=len(board)
+#     board=[list(map(int,i)) for i in board]
+#     board_size=len(board)
 
-COLUMN_GOAL=board[board_size-2]
-ROW_GOAL=board[board_size-1]
+#     column_goal=board[board_size-2]
+#     row_goal=board[board_size-1]
+#     board=board[:board_size-2]
 
-board=board[:board_size-2]
+#     # Initialize 2D-array for status of the board. It can be either True or False
+#     board_status = [[0 for x in range(len(board))] for y in range(len(board))] 
 
-print(board)
-print(COLUMN_GOAL)
-print(ROW_GOAL)
+#     for i in range(len(board)):
+#         for j in range(len(board)):
+#             board_status[i][j]=True
 
-# Initialize 2D-array for status of the board. It can be either True or False
-board_status = [[0 for x in range(len(board))] for y in range(len(board))] 
-
-for i in range(len(board)):
-    for j in range(len(board)):
-        board_status[i][j]=True
+#     # return board, board_size, column_goal, row_goal, board_status
