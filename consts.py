@@ -1,4 +1,8 @@
-SCREEN_WIDTH=600
+import sys
+
+sys.setrecursionlimit(15000)
+
+SCREEN_WIDTH=800
 SCREEN_HEIGHT=600
 BG_COLOR=(31,41,51)
 
